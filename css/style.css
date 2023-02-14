@@ -62,7 +62,7 @@ p {
 ul {
   font-size: 1.75em;
   font-family: 'Archivo', sans-serif;
-  list-style-type: "🐾   ";
+  list-style-type: disc;
   list-style-position: inside;
   margin-bottom: 15px;
 }

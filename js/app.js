@@ -3,8 +3,8 @@
 // Pat has a business idea to sell Salmon Cookies... Pat needs a proof of concept applicatoin to calculate the number of cookies each location must make every day in order to manage supplies and schedule... The number of cookies depends on hours of operation (6a-8p) and these factors: min number of customers per hour; max number of customers per hour; avg number of cookies purchased per customer. You need a sales.html to calculate sales projections and an index.html that is colorful, readable, and informative to be public-facing.
 
 // ? what are we going to display?
-// Shop Locations
-// TODO figure out what info about each kitten we need to show:
+// Store Locations
+// TODO figure out what info about each store we need to show:
 // * name
 // * hours with a function - 6am to 8pm
 // * min customers
@@ -13,10 +13,24 @@
 // * avg cookies per customer/sale
 
 
+// ********** GLOBALS **************
+
 // !!! HELPFUL FOR LAB
 let hours = ['6am', '7am', '8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm', '7pm'];
 
-// !!! HELPFUL FOR START OF LAB !!!!!
+let storeSection = document.getElementById('store-profiles');
+
+console.dir(storeSection);
+
+
+// ********** HELPER FUNCTIONS/UTILITES *********
+
+// function randomCustomerCalc(min,max){ // random number of customers per hour
+//   // got this from MDN docs
+//   return Math.floor(Math.random() * (max - min + 1) + min);
+// }
+
+// ********** OBJECT LITERALS **********
 
 let seattle = {
   name: 'Seattle',
@@ -24,48 +38,47 @@ let seattle = {
   maxCust: 65,
   avgCookieBought: 6.3,
   cookiesBought: [],
-  generateCookies: function(){
+  randomCustomer: [],
+  dailyTotal: 0,
+  getCookies: function(min,max){
     // calculation
-  }
-};
-
-// ********** GLOBALS **************
-
-let storeSection = document.getElementById('store-profiles');
-
-console.dir(storeSection);
-
-// ********** HELPER FUNCTIONS/UTILITES *********
-
-function randomCust(min,max){
-  // got this from MDN docs
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-// ********** OBJECT LITERALS **********
-
-
-let frankie = {
-  name: 'Frankie',
-  age: 0,
-  interests: ['wet food', 'cat nip', 'mice toys'],
-  isGoodWithCats: true,
-  isGoodWithDogs: true,
-  isGoodWithKids: true,
-  photo: 'img/frankie.jpeg',
-  getAge: function(){
-    this.age = `${randomAge(3,12)} months`;
+    // this.cookieNum = `${randomCustomerCalc(23-65)} cookies`;
+    for(let i = 0; i < hours.length; i++){
+      let customer = Math.floor(Math.random() * (max - min + 1) + min);
+      this.randomCustomer.push(customer);
+      console.log(customer);
+    }
   },
-  render: function(){
-    // ***** DOM MANIPULATION *****
 
-    // STEP 2: Create element
+  calcTotalCookiePerHour: function(){
+    this.getCookies(this.minCust, this.maxCust);
+    // randomCustomerCalc();
+    for(let i = 0; i < hours.length; i++){
+      let totalCookie = Math.round(this.randomCustomer[i] * this.avgCookieBought);
+      this.cookiesBought.push(totalCookie);
+      console.log(this.cookiesBought);
+      this.dailyTotal += totalCookie;
+    }
+    console.log(this.dailyTotal, `this is the total`)
+
+  },
+
+  render: function(){
+
+    this.calcTotalCookiePerHour();
+
+
+// ***** DOM MANIPULATION *****
+
+    //step 2 create element
     let articleElem = document.createElement('article');
-    // STEP 3: Add it to the dom
-    kittenSection.appendChild(articleElem);
+
+    //step 3 add it to the dom
+    storeSection.appendChild(articleElem);
 
     let h2Elem = document.createElement('h2');
     h2Elem.textContent = this.name;
+    console.log(h2Elem);
     articleElem.appendChild(h2Elem);
 
 
@@ -73,129 +86,349 @@ let frankie = {
     let ulElem = document.createElement('ul');
     articleElem.appendChild(ulElem);
 
-    for(let i = 0; i < this.interests.length; i++){
+    for(let i = 0; i < hours.length; i++){
       let liElem = document.createElement('li');
-      liElem.textContent = this.interests[i];
+      console.log(this.cookieNum);
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]} cookies`;
       ulElem.appendChild(liElem);
     }
 
+    let totalItem = document.createElement('li');
+    console.log();
+    totalItem.textContent = `Total: ${this.dailyTotal} cookies`;
+    ulElem.appendChild(totalItem);
+
     let pElem = document.createElement('p');
-    pElem.textContent = this.age;
+    pElem.alt = `${this.name} has an average of ${this.customerNum} per hour.`;
     articleElem.appendChild(pElem);
-
-
-    let imgElem = document.createElement('img');
-    imgElem.src = this.photo;
-    imgElem.alt = `${this.name} is an adorable ${this.age} month old kitten.`;
-    articleElem.appendChild(imgElem);
   }
 };
 
 
-let jumper = {
-  name: 'Jumper',
-  age: 0,
-  interests: ['dry food', 'treats', 'fish toys'],
-  isGoodWithCats: true,
-  isGoodWithDogs: false,
-  isGoodWithKids: false,
-  photo: 'img/jumper.jpeg',
-  randomAge: function(min, max){
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  },
-  getAge: function(){
-    this.age = `${this.randomAge(3,12)} months`;
-  },
-  render: function(){
-    // ***** DOM MANIPULATION *****
 
-    // STEP 2: Create element
+let tokyo = {
+  name: 'Tokyo',
+  minCust: 3,
+  maxCust: 24,
+  avgCookieBought: 1.2,
+  cookiesBought: [],
+  randomCustomer: [],
+  dailyTotal: 0,
+  getCookies: function(min,max){
+    // calculation
+    // this.cookieNum = `${randomCustomerCalc(23-65)} cookies`;
+    for(let i = 0; i < hours.length; i++){
+      let customer = Math.floor(Math.random() * (max - min + 1) + min);
+      this.randomCustomer.push(customer);
+      console.log(customer);
+    }
+  },
+
+  calcTotalCookiePerHour: function(){
+    this.getCookies(this.minCust, this.maxCust);
+    // randomCustomerCalc();
+    for(let i = 0; i < hours.length; i++){
+      let totalCookie = Math.round(this.randomCustomer[i] * this.avgCookieBought);
+      this.cookiesBought.push(totalCookie);
+      console.log(this.cookiesBought);
+      this.dailyTotal += totalCookie;
+    }
+    console.log(this.dailyTotal, `this is the total`)
+
+  },
+
+  render: function(){
+
+    this.calcTotalCookiePerHour();
+
+
+// ***** DOM MANIPULATION *****
+
+    //step 2 create element
     let articleElem = document.createElement('article');
-    // STEP 3: Add it to the dom
-    kittenSection.appendChild(articleElem);
+
+    //step 3 add it to the dom
+    storeSection.appendChild(articleElem);
 
     let h2Elem = document.createElement('h2');
     h2Elem.textContent = this.name;
+    console.log(h2Elem);
     articleElem.appendChild(h2Elem);
 
+
+    // ! USEFUL FOR LAB
     let ulElem = document.createElement('ul');
     articleElem.appendChild(ulElem);
 
-    for(let i = 0; i < this.interests.length; i++){
+    for(let i = 0; i < hours.length; i++){
       let liElem = document.createElement('li');
-      liElem.textContent = this.interests[i];
+      console.log(this.cookieNum);
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]} cookies`;
       ulElem.appendChild(liElem);
     }
 
+    let totalItem = document.createElement('li');
+    console.log();
+    totalItem.textContent = `Total: ${this.dailyTotal} cookies`;
+    ulElem.appendChild(totalItem);
+
     let pElem = document.createElement('p');
-    pElem.textContent = this.age;
+    pElem.alt = `${this.name} has an average of ${this.customerNum} per hour.`;
     articleElem.appendChild(pElem);
-
-
-    let imgElem = document.createElement('img');
-    imgElem.src = this.photo;
-    imgElem.alt = `${this.name} is an adorable ${this.age} month old kitten.`;
-    articleElem.appendChild(imgElem);
   }
 };
 
-let serena = {
-  name: 'Serena',
-  age: 0,
-  interests: ['mice', 'lasers', 'hunting'],
-  isGoodWithCats: false,
-  isGoodWithDogs: false,
-  isGoodWithKids: false,
-  photo: 'img/serena.jpeg',
-  randomAge: function(min, max){
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  },
-  getAge: function(){
-    this.age = `${this.randomAge(3,12)} months`;
-  },
-  render: function(){
-    // ***** DOM MANIPULATION *****
 
-    // STEP 2: Create element
+
+
+let dubai = {
+  name: 'Dubai',
+  minCust: 11,
+  maxCust: 38,
+  avgCookieBought: 3.7,
+  cookiesBought: [],
+  randomCustomer: [],
+  dailyTotal: 0,
+  getCookies: function(min,max){
+    // calculation
+    // this.cookieNum = `${randomCustomerCalc(23-65)} cookies`;
+    for(let i = 0; i < hours.length; i++){
+      let customer = Math.floor(Math.random() * (max - min + 1) + min);
+      this.randomCustomer.push(customer);
+      console.log(customer);
+    }
+  },
+
+  calcTotalCookiePerHour: function(){
+    this.getCookies(this.minCust, this.maxCust);
+    // randomCustomerCalc();
+    for(let i = 0; i < hours.length; i++){
+      let totalCookie = Math.round(this.randomCustomer[i] * this.avgCookieBought);
+      this.cookiesBought.push(totalCookie);
+      console.log(this.cookiesBought);
+      this.dailyTotal += totalCookie;
+    }
+    console.log(this.dailyTotal, `this is the total`)
+
+  },
+
+  render: function(){
+
+    this.calcTotalCookiePerHour();
+
+
+// ***** DOM MANIPULATION *****
+
+    //step 2 create element
     let articleElem = document.createElement('article');
-    // STEP 3: Add it to the dom
-    kittenSection.appendChild(articleElem);
+
+    //step 3 add it to the dom
+    storeSection.appendChild(articleElem);
 
     let h2Elem = document.createElement('h2');
     h2Elem.textContent = this.name;
+    console.log(h2Elem);
     articleElem.appendChild(h2Elem);
 
+
+    // ! USEFUL FOR LAB
     let ulElem = document.createElement('ul');
     articleElem.appendChild(ulElem);
 
-    for(let i = 0; i < this.interests.length; i++){
+    for(let i = 0; i < hours.length; i++){
       let liElem = document.createElement('li');
-      liElem.textContent = this.interests[i];
+      console.log(this.cookieNum);
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]} cookies`;
       ulElem.appendChild(liElem);
     }
 
+    let totalItem = document.createElement('li');
+    console.log();
+    totalItem.textContent = `Total: ${this.dailyTotal} cookies`;
+    ulElem.appendChild(totalItem);
+
     let pElem = document.createElement('p');
-    pElem.textContent = this.age;
+    pElem.alt = `${this.name} has an average of ${this.customerNum} per hour.`;
     articleElem.appendChild(pElem);
-
-
-    let imgElem = document.createElement('img');
-    imgElem.src = this.photo;
-    imgElem.alt = `${this.name} is an adorable ${this.age} month old kitten.`;
-    articleElem.appendChild(imgElem);
   }
 };
+
+
+
+
+
+let paris = {
+  name: 'Paris',
+  minCust: 20,
+  maxCust: 38,
+  avgCookieBought: 2.3,
+  cookiesBought: [],
+  randomCustomer: [],
+  dailyTotal: 0,
+  getCookies: function(min,max){
+    // calculation
+    // this.cookieNum = `${randomCustomerCalc(23-65)} cookies`;
+    for(let i = 0; i < hours.length; i++){
+      let customer = Math.floor(Math.random() * (max - min + 1) + min);
+      this.randomCustomer.push(customer);
+      console.log(customer);
+    }
+  },
+
+  calcTotalCookiePerHour: function(){
+    this.getCookies(this.minCust, this.maxCust);
+    // randomCustomerCalc();
+    for(let i = 0; i < hours.length; i++){
+      let totalCookie = Math.round(this.randomCustomer[i] * this.avgCookieBought);
+      this.cookiesBought.push(totalCookie);
+      console.log(this.cookiesBought);
+      this.dailyTotal += totalCookie;
+    }
+    console.log(this.dailyTotal, `this is the total`)
+
+  },
+
+  render: function(){
+
+    this.calcTotalCookiePerHour();
+
+
+// ***** DOM MANIPULATION *****
+
+    //step 2 create element
+    let articleElem = document.createElement('article');
+
+    //step 3 add it to the dom
+    storeSection.appendChild(articleElem);
+
+    let h2Elem = document.createElement('h2');
+    h2Elem.textContent = this.name;
+    console.log(h2Elem);
+    articleElem.appendChild(h2Elem);
+
+
+    // ! USEFUL FOR LAB
+    let ulElem = document.createElement('ul');
+    articleElem.appendChild(ulElem);
+
+    for(let i = 0; i < hours.length; i++){
+      let liElem = document.createElement('li');
+      console.log(this.cookieNum);
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]} cookies`;
+      ulElem.appendChild(liElem);
+    }
+
+    let totalItem = document.createElement('li');
+    console.log();
+    totalItem.textContent = `Total: ${this.dailyTotal} cookies`;
+    ulElem.appendChild(totalItem);
+
+    let pElem = document.createElement('p');
+    pElem.alt = `${this.name} has an average of ${this.customerNum} per hour.`;
+    articleElem.appendChild(pElem);
+  }
+};
+
+
+
+
+
+
+
+let lima = {
+  name: 'Lima',
+  minCust: 2,
+  maxCust: 16,
+  avgCookieBought: 4.6,
+  cookiesBought: [],
+  randomCustomer: [],
+  dailyTotal: 0,
+  getCookies: function(min,max){
+    // calculation
+    // this.cookieNum = `${randomCustomerCalc(23-65)} cookies`;
+    for(let i = 0; i < hours.length; i++){
+      let customer = Math.floor(Math.random() * (max - min + 1) + min);
+      this.randomCustomer.push(customer);
+      console.log(customer);
+    }
+  },
+
+  calcTotalCookiePerHour: function(){
+    this.getCookies(this.minCust, this.maxCust);
+    // randomCustomerCalc();
+    for(let i = 0; i < hours.length; i++){
+      let totalCookie = Math.round(this.randomCustomer[i] * this.avgCookieBought);
+      this.cookiesBought.push(totalCookie);
+      console.log(this.cookiesBought);
+      this.dailyTotal += totalCookie;
+    }
+    console.log(this.dailyTotal, `this is the total`)
+
+  },
+
+  render: function(){
+
+    this.calcTotalCookiePerHour();
+
+
+// ***** DOM MANIPULATION *****
+
+    //step 2 create element
+    let articleElem = document.createElement('article');
+
+    //step 3 add it to the dom
+    storeSection.appendChild(articleElem);
+
+    let h2Elem = document.createElement('h2');
+    h2Elem.textContent = this.name;
+    console.log(h2Elem);
+    articleElem.appendChild(h2Elem);
+
+
+    // ! USEFUL FOR LAB
+    let ulElem = document.createElement('ul');
+    articleElem.appendChild(ulElem);
+
+    for(let i = 0; i < hours.length; i++){
+      let liElem = document.createElement('li');
+      console.log(this.cookieNum);
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]} cookies`;
+      ulElem.appendChild(liElem);
+    }
+
+    let totalItem = document.createElement('li');
+    console.log();
+    totalItem.textContent = `Total: ${this.dailyTotal} cookies`;
+    ulElem.appendChild(totalItem);
+
+    let pElem = document.createElement('p');
+    pElem.alt = `${this.name} has an average of ${this.customerNum} per hour.`;
+    articleElem.appendChild(pElem);
+  }
+};
+
 
 
 // ********** EXECUTABLE CODE **********
-frankie.getAge();
-frankie.render();
-console.log(frankie);
 
-jumper.getAge();
-jumper.render();
-console.log(jumper);
+seattle.calcTotalCookiePerHour();
+seattle.render();
+console.log(seattle);
 
-serena.getAge();
-serena.render();
-console.log(serena);
+tokyo.calcTotalCookiePerHour();
+tokyo.render();
+console.log(tokyo);
+
+dubai.calcTotalCookiePerHour();
+dubai.render();
+console.log(dubai);
+
+paris.calcTotalCookiePerHour();
+paris.render();
+console.log(paris);
+
+lima.calcTotalCookiePerHour();
+lima.render();
+console.log(lima);
+
+
