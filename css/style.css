@@ -1,16 +1,19 @@
 h1 {
-  font-size: 3vwborder: 2px solid black
+  font-size: 3vwborder: 2px solid black;
 }
 
--------------------
 
 body {
-  background-color: #b4bec8;
+  background-color: #f58c8f
 }
 
 header {
-  background-color: #797d80;
+  background-color: #73a5f5;
   height: 100px;
+  margin: 10px;
+  padding: 10px;
+  border: 5px solid black;
+  border-style:dotted;
 }
 
 h1 {
@@ -83,6 +86,10 @@ table * {
   background-color: #797d80;
   border: 1px double #020005;
   padding: 8px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  
 }
 
 th {
@@ -97,10 +104,11 @@ td {
 footer {
   font-family: 'Archivo', sans-serif;
   font-size: 1.5em;
-  padding-top: 15px;
-  text-align: right;
+  padding: top 15px;
+  vertical-align: middle;
+  text-align: left;
   padding-right: 10px;
-  height: 100px;
+  height: 75px;
   background-color: #797d80;
-  margin-top: 30px;
+  margin-top: 20px;
 }
