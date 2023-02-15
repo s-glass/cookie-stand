@@ -1,434 +1,198 @@
 'use strict';
 
-// Pat has a business idea to sell Salmon Cookies... Pat needs a proof of concept applicatoin to calculate the number of cookies each location must make every day in order to manage supplies and schedule... The number of cookies depends on hours of operation (6a-8p) and these factors: min number of customers per hour; max number of customers per hour; avg number of cookies purchased per customer. You need a sales.html to calculate sales projections and an index.html that is colorful, readable, and informative to be public-facing.
-
-// ? what are we going to display?
-// Store Locations
-// TODO figure out what info about each store we need to show:
-// * name
-// * hours with a function - 6am to 8pm
-// * min customers
-// * max customers
-// * avg customers per hour - use a method to generate random number Math.random()
-// * avg cookies per customer/sale
-
-
 // ********** GLOBALS **************
 
-// !!! HELPFUL FOR LAB
-let hours = ['6am', '7am', '8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm', '7pm'];
+let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
-let storeSection = document.getElementById('store-profiles');
+let saleTable = document.getElementById('sale-table');
 
-console.dir(storeSection);
+let storeObjects = []; // store all of my store objects as an array
 
-
-// ********** HELPER FUNCTIONS/UTILITES *********
-
-// function randomCustomerCalc(min,max){ // random number of customers per hour
-//   // got this from MDN docs
-//   return Math.floor(Math.random() * (max - min + 1) + min);
-// }
-
-// ********** OBJECT LITERALS **********
-
-let seattle = {
-  name: 'Seattle',
-  minCust: 23,
-  maxCust: 65,
-  avgCookieBought: 6.3,
-  cookiesBought: [],
-  randomCustomer: [],
-  dailyTotal: 0,
-  getCookies: function(min,max){
-    // calculation
-    // this.cookieNum = `${randomCustomerCalc(23-65)} cookies`;
-    for(let i = 0; i < hours.length; i++){
-      let customer = Math.floor(Math.random() * (max - min + 1) + min);
-      this.randomCustomer.push(customer);
-      console.log(customer);
-    }
-  },
-
-  calcTotalCookiePerHour: function(){
-    this.getCookies(this.minCust, this.maxCust);
-    // randomCustomerCalc();
-    for(let i = 0; i < hours.length; i++){
-      let totalCookie = Math.round(this.randomCustomer[i] * this.avgCookieBought);
-      this.cookiesBought.push(totalCookie);
-      console.log(this.cookiesBought);
-      this.dailyTotal += totalCookie;
-    }
-    console.log(this.dailyTotal, `this is the total`)
-
-  },
-
-  render: function(){
-
-    this.calcTotalCookiePerHour();
+// console.dir(storeSection);
 
 
-// ***** DOM MANIPULATION *****
+//********HELPER FUNCTIONS *******
 
-    //step 2 create element
-    let articleElem = document.createElement('article');
-
-    //step 3 add it to the dom
-    storeSection.appendChild(articleElem);
-
-    let h2Elem = document.createElement('h2');
-    h2Elem.textContent = this.name;
-    console.log(h2Elem);
-    articleElem.appendChild(h2Elem);
+//header and footer row need to stand alone, not be in prototype
+//create one row to poulate the hours
+//create one row to populate totals 
+//footer will need a nested loop to calculate totals by hour for all stores (vs. by day)
 
 
-    // ! USEFUL FOR LAB
-    let ulElem = document.createElement('ul');
-    articleElem.appendChild(ulElem);
+// **********CONSTRUCTOR FUNCTION ****************
 
-    for(let i = 0; i < hours.length; i++){
-      let liElem = document.createElement('li');
-      console.log(this.cookieNum);
-      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]} cookies`;
-      ulElem.appendChild(liElem);
-    }
+function Store(name, minCust, maxCust, avgCookiesBought) {
+  this.name = name;
+  this.minCust = minCust;
+  this.maxCust = maxCust;
+  this.avgCookiesBought = avgCookiesBought;
+  this.cookiesBought = [];
+  this.randomCustomer = [];
+  this.dailyTotal = 0;
+}
 
-    let totalItem = document.createElement('li');
-    console.log();
-    totalItem.textContent = `Total: ${this.dailyTotal} cookies`;
-    ulElem.appendChild(totalItem);
+// *************PROTOTYPE METHODS*************
 
-    let pElem = document.createElement('p');
-    pElem.alt = `${this.name} has an average of ${this.customerNum} per hour.`;
-    articleElem.appendChild(pElem);
+Store.prototype.getCookies = function () {
+  for (let i = 0; i < hours.length; i++) {
+    let customer = Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust);
+    this.randomCustomer.push(customer);
+    console.log('the customers per hour is: ' + customer);
   }
 };
 
-
-
-let tokyo = {
-  name: 'Tokyo',
-  minCust: 3,
-  maxCust: 24,
-  avgCookieBought: 1.2,
-  cookiesBought: [],
-  randomCustomer: [],
-  dailyTotal: 0,
-  getCookies: function(min,max){
-    // calculation
-    // this.cookieNum = `${randomCustomerCalc(23-65)} cookies`;
-    for(let i = 0; i < hours.length; i++){
-      let customer = Math.floor(Math.random() * (max - min + 1) + min);
-      this.randomCustomer.push(customer);
-      console.log(customer);
-    }
-  },
-
-  calcTotalCookiePerHour: function(){
-    this.getCookies(this.minCust, this.maxCust);
-    // randomCustomerCalc();
-    for(let i = 0; i < hours.length; i++){
-      let totalCookie = Math.round(this.randomCustomer[i] * this.avgCookieBought);
-      this.cookiesBought.push(totalCookie);
-      console.log(this.cookiesBought);
-      this.dailyTotal += totalCookie;
-    }
-    console.log(this.dailyTotal, `this is the total`)
-
-  },
-
-  render: function(){
-
-    this.calcTotalCookiePerHour();
-
-
-// ***** DOM MANIPULATION *****
-
-    //step 2 create element
-    let articleElem = document.createElement('article');
-
-    //step 3 add it to the dom
-    storeSection.appendChild(articleElem);
-
-    let h2Elem = document.createElement('h2');
-    h2Elem.textContent = this.name;
-    console.log(h2Elem);
-    articleElem.appendChild(h2Elem);
-
-
-    // ! USEFUL FOR LAB
-    let ulElem = document.createElement('ul');
-    articleElem.appendChild(ulElem);
-
-    for(let i = 0; i < hours.length; i++){
-      let liElem = document.createElement('li');
-      console.log(this.cookieNum);
-      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]} cookies`;
-      ulElem.appendChild(liElem);
-    }
-
-    let totalItem = document.createElement('li');
-    console.log();
-    totalItem.textContent = `Total: ${this.dailyTotal} cookies`;
-    ulElem.appendChild(totalItem);
-
-    let pElem = document.createElement('p');
-    pElem.alt = `${this.name} has an average of ${this.customerNum} per hour.`;
-    articleElem.appendChild(pElem);
+Store.prototype.calcTotalCookiePerHOur = function () {
+  this.getCookies(this.minCust, this.maxCust);
+  for (let i = 0; i < hours.length; i++) {
+    let totalCookie = Math.round(this.randomCustomer[i] * this.avgCookiesBought);
+    console.log (typeof(this.randomCustomer[i]));
+    console.log (typeof(this.avgCookieBought));
+    this.cookiesBought.push(totalCookie);
+    console.log('this is the number of cookies bought per hour' + this.cookiesBought);
+    this.dailyTotal += totalCookie;
   }
 };
 
+Store.prototype.render = function () {
+
+  // const containerElem = document.getElementById('store-profiles'); // I have this in Globals also, do I need it here?
+
+  // const articleElem = document.createElement('article');
+  // containerElem.appendChild(articleElem);
+
+  this.calcTotalCookiePerHOur();
+
+  //   let articleElem = document.createElement('article'); // row or tr - attaches to tables
+  //   storeSection.appendChild(articleElem); // render to table instead of this thing - store section? or articleElem? 
+
+  // //(helper function - header)
+
+  //   for(let i = 0; i < hours.length; i++){
+  //     let headerElem = document.createElement('header'); // td cells attach to row
+  //     console.log(this.cookieNum);
+  //     headerElem.textContent = `${hours[i]}`;
+  //     headerElem.textContent = `Total: ${this.dailyTotal} cookies`;
+  //     headerElem.appendChild(headerElem);
+  //   }
+  // // end header attempt
+
+  //   let h2Elem = document.createElement('h2'); // th (name) (cell) attach to rows
+  //   h2Elem.textContent = this.name; //h2 text content value assigned
+  //   console.log(h2Elem);
+  //   articleElem.appendChild(h2Elem);
+
+
+  //   let ulElem = document.createElement('ul'); // tr (row), attach to table
+  //   articleElem.appendChild(ulElem);
+
+  //   for(let i = 0; i < hours.length; i++){
+  //     let liElem = document.createElement('li'); // td cells attach to row
+  //     console.log(this.cookieNum);
+  //     liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]} cookies`;
+  //     ulElem.appendChild(liElem);
+  //   }
+
+  //   let totalItem = document.createElement('li'); // td cells attach to row
+  //   console.log();
+  //   totalItem.textContent = `Total: ${this.dailyTotal} cookies`;
+  //   ulElem.appendChild(totalItem);
+
+  //   let pElem = document.createElement('p');
+  //   pElem.alt = `${this.name} has an average of ${this.customerNum} per hour.`;
+  //   articleElem.appendChild(pElem);
 
 
 
-let dubai = {
-  name: 'Dubai',
-  minCust: 11,
-  maxCust: 38,
-  avgCookieBought: 3.7,
-  cookiesBought: [],
-  randomCustomer: [],
-  dailyTotal: 0,
-  getCookies: function(min,max){
-    // calculation
-    // this.cookieNum = `${randomCustomerCalc(23-65)} cookies`;
-    for(let i = 0; i < hours.length; i++){
-      let customer = Math.floor(Math.random() * (max - min + 1) + min);
-      this.randomCustomer.push(customer);
-      console.log(customer);
-    }
-  },
+  // TABLE RENDERING - table, rows, table cells
 
-  calcTotalCookiePerHour: function(){
-    this.getCookies(this.minCust, this.maxCust);
-    // randomCustomerCalc();
-    for(let i = 0; i < hours.length; i++){
-      let totalCookie = Math.round(this.randomCustomer[i] * this.avgCookieBought);
-      this.cookiesBought.push(totalCookie);
-      console.log(this.cookiesBought);
-      this.dailyTotal += totalCookie;
-    }
-    console.log(this.dailyTotal, `this is the total`)
+  // header row
+  let headerRow = document.createElement('tr');
+  saleTable.appendChild(headerRow);
 
-  },
+  //header cell
+  let headerCell = document.createElement('th');
+  headerCell.textContent = this.name;
+  headerRow.appendChild(headerCell);
 
-  render: function(){
+  // filling in the table with the prototype data
 
-    this.calcTotalCookiePerHour();
-
-
-// ***** DOM MANIPULATION *****
-
-    //step 2 create element
-    let articleElem = document.createElement('article');
-
-    //step 3 add it to the dom
-    storeSection.appendChild(articleElem);
-
-    let h2Elem = document.createElement('h2');
-    h2Elem.textContent = this.name;
-    console.log(h2Elem);
-    articleElem.appendChild(h2Elem);
-
-
-    // ! USEFUL FOR LAB
-    let ulElem = document.createElement('ul');
-    articleElem.appendChild(ulElem);
-
-    for(let i = 0; i < hours.length; i++){
-      let liElem = document.createElement('li');
-      console.log(this.cookieNum);
-      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]} cookies`;
-      ulElem.appendChild(liElem);
-    }
-
-    let totalItem = document.createElement('li');
-    console.log();
-    totalItem.textContent = `Total: ${this.dailyTotal} cookies`;
-    ulElem.appendChild(totalItem);
-
-    let pElem = document.createElement('p');
-    pElem.alt = `${this.name} has an average of ${this.customerNum} per hour.`;
-    articleElem.appendChild(pElem);
+  for (let i = 0; i < hours.length; i++) {
+    let cookieData = document.createElement('td');
+    cookieData.textContent = this.cookiesBought[i];
+    headerRow.appendChild(cookieData);
   }
-};
 
+  //   for(let i = 0; i < hours.length; i++){
+  //     let liElem = document.createElement('li'); // td cells attach to row
+  //     console.log(this.cookieNum);
+  //     liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]} cookies`;
+  //     ulElem.appendChild(liElem);
 
+  //data row
 
+  // let row1 = document.createElement('tr');
+  // headerRow.appendChild(row1);
+  // row1.textContent = `${hours[i]}`;
 
+  //data cell
 
-let paris = {
-  name: 'Paris',
-  minCust: 20,
-  maxCust: 38,
-  avgCookieBought: 2.3,
-  cookiesBought: [],
-  randomCustomer: [],
-  dailyTotal: 0,
-  getCookies: function(min,max){
-    // calculation
-    // this.cookieNum = `${randomCustomerCalc(23-65)} cookies`;
-    for(let i = 0; i < hours.length; i++){
-      let customer = Math.floor(Math.random() * (max - min + 1) + min);
-      this.randomCustomer.push(customer);
-      console.log(customer);
-    }
-  },
+  // let timeDataCell = document.createElement('td')
+  // row1.appendChild(timeDataCell);
+  // timeDataCell.textContent = this.
 
-  calcTotalCookiePerHour: function(){
-    this.getCookies(this.minCust, this.maxCust);
-    // randomCustomerCalc();
-    for(let i = 0; i < hours.length; i++){
-      let totalCookie = Math.round(this.randomCustomer[i] * this.avgCookieBought);
-      this.cookiesBought.push(totalCookie);
-      console.log(this.cookiesBought);
-      this.dailyTotal += totalCookie;
-    }
-    console.log(this.dailyTotal, `this is the total`)
+  // let row2 = document.createElement('tr');
+  // table.appendChild(row2);
 
-  },
+  // //data cell
+  // let td1Elem = document.createElement('td');
+  // td1Elem.textContent = this.name;
+  // row2.appendChild(td1Elem);
 
-  render: function(){
+  // let td2Elem = document.createElement('td');
+  // td2Elem.textContent = this.isGoodWithDogs;
+  // row2.appendChild(td2Elem);
 
-    this.calcTotalCookiePerHour();
+  // let td3Elem = document.createElement('td');
+  // td3Elem.textContent = this.isGoodWithKids;
+  // row2.appendChild(td3Elem);
+}
 
-
-// ***** DOM MANIPULATION *****
-
-    //step 2 create element
-    let articleElem = document.createElement('article');
-
-    //step 3 add it to the dom
-    storeSection.appendChild(articleElem);
-
-    let h2Elem = document.createElement('h2');
-    h2Elem.textContent = this.name;
-    console.log(h2Elem);
-    articleElem.appendChild(h2Elem);
-
-
-    // ! USEFUL FOR LAB
-    let ulElem = document.createElement('ul');
-    articleElem.appendChild(ulElem);
-
-    for(let i = 0; i < hours.length; i++){
-      let liElem = document.createElement('li');
-      console.log(this.cookieNum);
-      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]} cookies`;
-      ulElem.appendChild(liElem);
-    }
-
-    let totalItem = document.createElement('li');
-    console.log();
-    totalItem.textContent = `Total: ${this.dailyTotal} cookies`;
-    ulElem.appendChild(totalItem);
-
-    let pElem = document.createElement('p');
-    pElem.alt = `${this.name} has an average of ${this.customerNum} per hour.`;
-    articleElem.appendChild(pElem);
+function header() {
+  let headerRow = document.createElement('tr');
+  headerRow.textContent = 'location';
+  saleTable.appendChild(headerRow);
+  for (let i = 0; i < hours.length; i++) {
+    let headerTime = document.createElement('th');
+    headerTime.textContent = hours[i];
+    headerRow.appendChild(headerTime);
   }
-};
+}
+
+// ********EXECUTABLE CODE************
+
+let seattle = new Store('Seattle', '23', '65', '6.3');
+let tokyo = new Store('Tokyo', '3', '24', '1.2');
+let dubai = new Store('Dubai', '11', '28', '3.7');
+let paris = new Store('Paris', '20', '38', '2.3');
+let lima = new Store('Lima', '2', '16', '4.6');
 
 
+//push new stores to the array
 
+storeObjects.push(seattle, tokyo, dubai, paris, lima);
+console.log(storeObjects);
 
+// helper function to call all needed methods
 
+header();
 
-
-let lima = {
-  name: 'Lima',
-  minCust: 2,
-  maxCust: 16,
-  avgCookieBought: 4.6,
-  cookiesBought: [],
-  randomCustomer: [],
-  dailyTotal: 0,
-  getCookies: function(min,max){
-    // calculation
-    // this.cookieNum = `${randomCustomerCalc(23-65)} cookies`;
-    for(let i = 0; i < hours.length; i++){
-      let customer = Math.floor(Math.random() * (max - min + 1) + min);
-      this.randomCustomer.push(customer);
-      console.log(customer);
-    }
-  },
-
-  calcTotalCookiePerHour: function(){
-    this.getCookies(this.minCust, this.maxCust);
-    // randomCustomerCalc();
-    for(let i = 0; i < hours.length; i++){
-      let totalCookie = Math.round(this.randomCustomer[i] * this.avgCookieBought);
-      this.cookiesBought.push(totalCookie);
-      console.log(this.cookiesBought);
-      this.dailyTotal += totalCookie;
-    }
-    console.log(this.dailyTotal, `this is the total`)
-
-  },
-
-  render: function(){
-
-    this.calcTotalCookiePerHour();
-
-
-// ***** DOM MANIPULATION *****
-
-    //step 2 create element
-    let articleElem = document.createElement('article');
-
-    //step 3 add it to the dom
-    storeSection.appendChild(articleElem);
-
-    let h2Elem = document.createElement('h2');
-    h2Elem.textContent = this.name;
-    console.log(h2Elem);
-    articleElem.appendChild(h2Elem);
-
-
-    // ! USEFUL FOR LAB
-    let ulElem = document.createElement('ul');
-    articleElem.appendChild(ulElem);
-
-    for(let i = 0; i < hours.length; i++){
-      let liElem = document.createElement('li');
-      console.log(this.cookieNum);
-      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]} cookies`;
-      ulElem.appendChild(liElem);
-    }
-
-    let totalItem = document.createElement('li');
-    console.log();
-    totalItem.textContent = `Total: ${this.dailyTotal} cookies`;
-    ulElem.appendChild(totalItem);
-
-    let pElem = document.createElement('p');
-    pElem.alt = `${this.name} has an average of ${this.customerNum} per hour.`;
-    articleElem.appendChild(pElem);
+function renderAll() {
+  for (let i = 0; i < storeObjects.length; i++) {
+    storeObjects[i].getCookies();
+    storeObjects[i].render();
   }
-};
+}
 
+renderAll();
 
-
-// ********** EXECUTABLE CODE **********
-
-seattle.calcTotalCookiePerHour();
-seattle.render();
-console.log(seattle);
-
-tokyo.calcTotalCookiePerHour();
-tokyo.render();
-console.log(tokyo);
-
-dubai.calcTotalCookiePerHour();
-dubai.render();
-console.log(dubai);
-
-paris.calcTotalCookiePerHour();
-paris.render();
-console.log(paris);
-
-lima.calcTotalCookiePerHour();
-lima.render();
-console.log(lima);
-
-
+//render needs to live in the prototype if you have just one for loop, every time you have DOM, you have the 'render' that will create its row for the table.
