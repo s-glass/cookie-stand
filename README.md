@@ -5,7 +5,7 @@
 
 In this About Me repository, I'll be working on a project called Cookie Stand.
 
-![salmon](salmon.png)
+![salmon](img/salmon.png)
 
 ## Author: Sarah Glass
 

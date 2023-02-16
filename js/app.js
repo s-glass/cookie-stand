@@ -29,6 +29,8 @@ function Store(name, minCust, maxCust, avgCookiesBought) {
   this.cookiesBought = [];
   this.randomCustomer = [];
   this.dailyTotal = 0;
+
+  storeObjects.push(this);
 }
 
 // *************PROTOTYPE METHODS*************
@@ -45,12 +47,21 @@ Store.prototype.calcTotalCookiePerHOur = function () {
   this.getCookies(this.minCust, this.maxCust);
   for (let i = 0; i < hours.length; i++) {
     let totalCookie = Math.round(this.randomCustomer[i] * this.avgCookiesBought);
-    console.log (typeof(this.randomCustomer[i]));
-    console.log (typeof(this.avgCookieBought));
+    console.log(typeof (this.randomCustomer[i]));
+    console.log(typeof (this.avgCookieBought));
     this.cookiesBought.push(totalCookie);
     console.log('this is the number of cookies bought per hour' + this.cookiesBought);
     this.dailyTotal += totalCookie;
+    //for(let j = 0; j< this.avgCookieBought.length; j++){
+    // sum += this.avgCookieBought[j][i];
   }
+};
+
+Store.prototype.setCookiesTotal = function () {
+  for (let i = 0; i < hours.length; i++) {
+    this.dailyTotal += this.cookiesBought[i];
+  }
+  console.log(this.dailyTotal);
 };
 
 Store.prototype.render = function () {
@@ -114,6 +125,7 @@ Store.prototype.render = function () {
   headerCell.textContent = this.name;
   headerRow.appendChild(headerCell);
 
+
   // filling in the table with the prototype data
 
   for (let i = 0; i < hours.length; i++) {
@@ -121,6 +133,17 @@ Store.prototype.render = function () {
     cookieData.textContent = this.cookiesBought[i];
     headerRow.appendChild(cookieData);
   }
+  // for (let j= 0; j < storeObjects.length; j ++) {
+  let dailyTotalTD = document.createElement('td');
+  dailyTotalTD.textContent = this.dailyTotal;
+  console.log(this.dailyTotal);
+  headerRow.appendChild(dailyTotalTD);
+
+
+  // let totalCell = document.createElement('th');
+  // totalCell.textContent = 'Store Totals';
+  // headerRow.appendChild(totalCell);
+
 
   //   for(let i = 0; i < hours.length; i++){
   //     let liElem = document.createElement('li'); // td cells attach to row
@@ -155,19 +178,51 @@ Store.prototype.render = function () {
   // let td3Elem = document.createElement('td');
   // td3Elem.textContent = this.isGoodWithKids;
   // row2.appendChild(td3Elem);
-}
+};
 
 function header() {
   let headerRow = document.createElement('tr');
-  headerRow.textContent = 'location';
+  headerRow.textContent = 'Location';
   saleTable.appendChild(headerRow);
   for (let i = 0; i < hours.length; i++) {
     let headerTime = document.createElement('th');
     headerTime.textContent = hours[i];
     headerRow.appendChild(headerTime);
   }
+
+  let totalCell = document.createElement('th');
+  totalCell.textContent = 'Store Totals';
+  headerRow.appendChild(totalCell);
 }
 
+function footer() {
+  let footerRow = document.createElement('tr');
+  let footerTime = document.createElement('th');
+  footerTime.textContent = 'Total by Hour';
+  footerRow.appendChild(footerTime);
+  saleTable.appendChild(footerRow);
+
+  let grandTotal = 0;
+  for (let i = 0; i < hours.length; i++) {
+    let hourlyTotal = 0;
+    for (let j = 0; j < storeObjects.length; j++) {
+      hourlyTotal += storeObjects[j].cookiesBought[i];
+      grandTotal += storeObjects[j].cookiesBought[i];
+      console.log(storeObjects[j].cookiesBought);
+    }
+    footerTime = document.createElement('th');
+    footerTime.textContent = hourlyTotal;
+    footerRow.appendChild(footerTime);
+
+  }
+  footerTime = document.createElement('th');
+  footerTime.textContent = grandTotal;
+  footerRow.appendChild(footerTime);
+  saleTable.appendChild(footerRow);
+
+
+
+}
 // ********EXECUTABLE CODE************
 
 let seattle = new Store('Seattle', '23', '65', '6.3');
@@ -176,23 +231,27 @@ let dubai = new Store('Dubai', '11', '28', '3.7');
 let paris = new Store('Paris', '20', '38', '2.3');
 let lima = new Store('Lima', '2', '16', '4.6');
 
+// storeObjects.push(seattle, tokyo, dubai, paris, lima);
+// console.log(storeObjects);
 
 //push new stores to the array
 
-storeObjects.push(seattle, tokyo, dubai, paris, lima);
-console.log(storeObjects);
+
 
 // helper function to call all needed methods
 
 header();
+
 
 function renderAll() {
   for (let i = 0; i < storeObjects.length; i++) {
     storeObjects[i].getCookies();
     storeObjects[i].render();
   }
+  footer();
 }
 
 renderAll();
+
 
 //render needs to live in the prototype if you have just one for loop, every time you have DOM, you have the 'render' that will create its row for the table.
