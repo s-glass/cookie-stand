@@ -9,16 +9,12 @@ In this About Me repository, I'll be working on a project called Cookie Stand.
 
 ## Author: Sarah Glass
 
-## Lab 06 Description
-
-
+## Labs 06 - 09
 
 ## Links and Resources
 
 ## Most Recent Lighthouse accessibility score (insert screenshot)
 
-![lighthouse score](lighthouse_lab05.png)
+![lighthouse score](img/lighthouse-lab09.png)
 
 ## Reflections and Comments
-
-### Lab 06: 
