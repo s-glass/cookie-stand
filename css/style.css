@@ -1,70 +1,111 @@
-h1 {
-  font-size: 3vwborder: 2px solid black;
-}
-
-
 body {
   background-color: #f9a4a7
 }
 
-header {
+header section {
   background-color: #73a5f5;
   height: 100px;
-  margin: 10px;
-  padding: 10px;
+  margin: 0px;
+  padding: 0px;
   border: 5px solid black;
   border-style:dotted;
+  font-weight: bold;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 50px;
+  width:auto
 }
-
-main ul {
-  font-size: 1.75em;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 15px;
+header section h1 {
+  font-size: 50px;
+  margin-top: 20px;
+  font-weight: bold;
 }
-
-main h1 {
-  margin: 100px; 
-}
-
-/* header nav {
-  display: flex;
-  justify-content:space-evenly; 
-  background-color:rgb(121, 189, 141) 
-} */
 
 header nav ul { 
 display: inline-block;
-padding: 5px 15px;
+padding: 15px;
 list-style-type: none;
 text-align: left;
 font-size: 30px;
 color: black;
 margin-top: 0px;
-font-family: Arial, Helvetica, sans-serif;
+margin-bottom: 50px;
+font-family: 'Work Sans', sans-serif;
+font-weight: bold;
 }
 
-h1 {
-  font-family: 'Poppins', sans-serif;
-  background-color: inherit;
-  font-size: 3em;
-  text-align: center;
-  padding-top: 20px;
-  margin-bottom: 50px;
+#About img{
+  border:5px solid black;
+  border-style: dotted;
 }
 
-main>h2 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.75em;
-  width: max-content;
-  padding: 30px;
-  margin: 100px ;
+#About h1 {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: left;
+  padding-top: 10px;
   margin-bottom: 10px;
+  border: 2px solid black;
+  border-style: dotted;
+  background-color:hsl(155, 39%, 59%);
+  padding: 10px;
 }
 
-#hero {
-  /* float: left;
-  margin:  */
+#About p {
+  padding-left: 50px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 35px;
+  font-weight: bold;
+}
 
+#Locations h1{
+font-family: 'Work Sans', sans-serif;
+font-size: 40px;
+font-weight: bold;
+text-align: left;
+padding-top: 10px;
+margin-bottom: 10px;
+border: 2px solid black;
+border-style: dotted;
+background-color: hsl(155, 39%, 59%);
+padding: 10px;
+
+}
+
+#Locations ul {
+  font-size: 1.75em;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: bold;
+  margin-bottom: 15px;
+  background-color: antiquewhite; 
+  border: 5px solid black;
+  border-style: dotted;
+  list-style-type: disc;
+  list-style-position:inside;
+  padding: 20px;
+  margin: 30px; 
+  display: inline-block;
+}
+
+#Hours p{
+  font-family: 'Work Sans', sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: left;
+  padding-top: 10px;
+  margin-bottom: 100px;
+  border: 2px solid black;
+  border-style: dotted;
+  background-color: hsl(155, 39%, 59%);
+  padding: 10px;
+}
+main h1 {
+  margin: 50px; 
+  display: inline-block;
+}
+
+#Shirt p {
+  margin: 50px;
 }
 
 section {
@@ -75,74 +116,36 @@ section {
   flex-wrap: wrap;
 }
 
-article {
-  border: 5px double #020005;
-  background-color: #75abe9;
-  padding: 30px;
-  margin-top: 30px;
-}
-
-article h2 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.75em;
-  padding-bottom: 10px;
-  text-decoration: underline;
-}
-
-p {
-  font-size: 30px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 15px;
-  ;
-}
-
-ul {
-  font-size: 1.75em;
-  font-family: 'Archivo', sans-serif;
-  list-style-type: disc;
-  list-style-position:inside
-  margin-bottom: 15px;
-}
-
-li {
-  font-family: 'Archivo', sans-serif;
-  font-size: 25px;
-  margin-top: 15px;
-
-}
-
-img {
-  margin-bottom: 30px;
-}
-
-table * {
-  font-family: 'Archivo', sans-serif;
-  background-color: #797d80;
-  border: 1px double #020005;
-  padding: 8px;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  
-}
-
-th {
-  font-weight:900;
-}
-
-td {
-  text-align: center;
-}
-
 
 footer {
-  font-family: 'Archivo', sans-serif;
-  font-size: 1.5em;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 2em;
+  font-weight: bold;
   padding: top 15px;
-  vertical-align: middle;
   text-align: left;
   padding-right: 10px;
   height: 75px;
   background-color: #797d80;
   margin-top: 20px;
+  text-align:left;
+  float: left;
+  width:auto;
+  height: auto;
 }
+
+#Contact {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+  text-align:left;
+}
+
+#Socials {
+  text-align: left;
+  padding: 0px;
+  margin: 0px;
+}
+
+
+
+

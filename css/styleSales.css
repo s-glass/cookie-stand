@@ -1,7 +1,13 @@
-h1 {
-  font-size: 3vwborder: 2px solid black;
+header h1 {
+  font-size: 12px solid black;
+  font-weight: 1000;
 }
 
+header h2 {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  font-size: 40px; 
+}
 
 body {
   background-color: #f58c8f
@@ -17,17 +23,89 @@ header {
 }
 
 h1 {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Work Sans', sans-serif;
   background-color: inherit;
-  font-size: 3em;
+  font-size: 4em;
   text-align: center;
   padding-top: 20px;
   margin-bottom: 50px;
 }
 
+form {
+  font-family: 'Work Sans', sans-serif;
+  box-sizing: border-box;
+  padding: 2rem;
+  width: 60%;
+  margin: auto;
+  margin-top: 4rem;
+  border-radius: 1rem;
+  background-color: hsl(155, 39%, 59%);
+  border: 4px solid hsl(202, 15%, 26%);
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+}
+
+form legend {
+  font-size: 50px;
+  font-weight: 700;
+}
+
+form p {
+  font-size: 2rem;
+  margin-top: 0.5rem;
+}
+
+form label {
+  display: inline-block;
+  font: sans-serif;
+  font-size: 30px;
+  font-weight: 1000;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+input[type="text"] {
+  font-size: 2rem;
+  font-weight: 400;
+  display: block;
+  box-sizing: border-box;
+  width: 80%;
+  padding: 0.5rem 0.75rem;
+}
+
+button {
+  width:fit-content;
+  margin-top: 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  background-color: #73a5f5;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  writing-mode:vertical-rl;
+  text-orientation:upright;
+}
+
+/* button[type="submit"] {
+  background-color: hsl(213, 73%, 50%);
+  color: white;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 15px; 
+  line-height: 2; 
+  padding: 1.5em;
+  border-width: 2px; 
+  border-style: solid black;
+  width: 10%;
+  display:inline-flex;
+}
+
+button[type="submit"]:hover {
+  background-color: hsl(213, 73%, 40%); */
+
 main>h2 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.75em;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 50px;
+  font-weight: 700;
   width: max-content;
   padding: 30px;
   margin: auto;
@@ -50,7 +128,7 @@ article {
 }
 
 article h2 {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-size: 1.75em;
   padding-bottom: 10px;
   text-decoration: underline;
@@ -58,20 +136,20 @@ article h2 {
 
 p {
   font-size: 1.25em;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Work Sans', sans-serif;
   margin-bottom: 15px;
 }
 
 ul {
   font-size: 1.75em;
-  font-family: 'Archivo', sans-serif;
+  font-family: 'Work Sans', sans-serif;
   list-style-type: disc;
   list-style-position: inside;
   margin-bottom: 15px;
 }
 
 li {
-  font-family: 'Archivo', sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-size: .75em;
   margin-top: 15px;
 
@@ -82,14 +160,15 @@ img {
 }
 
 table * {
-  font-family: 'Archivo', sans-serif;
-  font-size: 20px; 
+  font-family: 'Work Sans', sans-serif;
+  font-size: 30px; 
   background-color: #bdcddc;
   border: 1px double #020005;
   padding: 8px;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 100px; 
   
 }
 
@@ -108,9 +187,11 @@ td {
 
 
 footer {
-  font-family: 'Archivo', sans-serif;
-  font-size: 1.5em;
-  padding: top 15px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 30px;
+  font-weight: 1000;
+  font-weight:bold;
+  padding: top 50px;
   vertical-align: middle;
   text-align: left;
   padding-right: 10px;
