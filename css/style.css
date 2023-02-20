@@ -1,5 +1,5 @@
 body {
-  background-color: #f9a4a7
+  background-color: #f58c8f
 }
 
 header section {
@@ -10,7 +10,7 @@ header section {
   border: 5px solid black;
   border-style:dotted;
   font-weight: bold;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Sriracha', cursive;
   font-size: 50px;
   width:auto
 }
@@ -18,6 +18,8 @@ header section h1 {
   font-size: 50px;
   margin-top: 20px;
   font-weight: bold;
+  font-family: 'Sriracha', cursive;
+  color: rgb(8, 8, 96);
 }
 
 header nav ul { 
@@ -25,11 +27,11 @@ display: inline-block;
 padding: 15px;
 list-style-type: none;
 text-align: left;
-font-size: 30px;
-color: black;
+font-size: 40px;
+color: rgb(8, 8, 96);
 margin-top: 0px;
 margin-bottom: 50px;
-font-family: 'Work Sans', sans-serif;
+font-family: 'Sriracha', cursive;
 font-weight: bold;
 }
 
@@ -39,7 +41,8 @@ font-weight: bold;
 }
 
 #About h1 {
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Sriracha', cursive;
+  color: rgb(8, 8, 96);
   font-size: 40px;
   font-weight: bold;
   text-align: left;
@@ -53,13 +56,15 @@ font-weight: bold;
 
 #About p {
   padding-left: 50px;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Zilla Slab', serif;
+  color: rgb(72, 70, 70);
   font-size: 35px;
   font-weight: bold;
 }
 
 #Locations h1{
-font-family: 'Work Sans', sans-serif;
+font-family: 'Sriracha', cursive;
+color: rgb(8, 8, 96);
 font-size: 40px;
 font-weight: bold;
 text-align: left;
@@ -74,7 +79,8 @@ padding: 10px;
 
 #Locations ul {
   font-size: 1.75em;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Zilla Slab', serif;
+  color: rgb(72, 70, 70);
   font-weight: bold;
   margin-bottom: 15px;
   background-color: antiquewhite; 
@@ -88,7 +94,8 @@ padding: 10px;
 }
 
 #Hours p{
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Sriracha', cursive;
+  color: rgb(8, 8, 96);
   font-size: 40px;
   font-weight: bold;
   text-align: left;
@@ -118,7 +125,8 @@ section {
 
 
 footer {
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Sriracha', cursive;
+  color: rgb(8, 8, 96);
   font-size: 2em;
   font-weight: bold;
   padding: top 15px;
@@ -134,7 +142,8 @@ footer {
 }
 
 #Contact {
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Zilla Slab', serif;
+  color: rgb(14, 14, 14);
   font-size: 25px;
   font-weight: bold;
   text-align:left;

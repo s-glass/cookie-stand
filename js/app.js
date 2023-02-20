@@ -206,7 +206,7 @@ function renderAll() {
 renderAll();
 
 // TODO: Step 2 - attach event listener
-myForm.addEventListener('submit', handleFormSubmit);
+myForm.addEventListener('submit', handleFormSubmit); 
 
 
 //render needs to live in the prototype if you have just one for loop, every time you have DOM, you have the 'render' that will create its row for the table.
